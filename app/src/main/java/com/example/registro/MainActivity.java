@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
                    pass.getText().toString().isEmpty()){
 
                     Toast.makeText(getBaseContext(), "Favor llenar todos los campos", Toast.LENGTH_SHORT).show();
+                }else if(!email.getText().toString().contains("@") ||!email.getText().toString().contains(".")) {
+                    Toast.makeText(getBaseContext(), "Ingrese Email válido", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getBaseContext(), "Helouuuu "+ nombre.getText().toString() + " " +apellido.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
