@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Registro</string>
+    <string name="pass">Contraseña</string>
+    <string name="save">Crear cuenta</string>
+    <string name="email">Email</string>
+    <string name="lastName">Apellidos</string>
+    <string name="firstName">Nombre</string>
 </resources>
