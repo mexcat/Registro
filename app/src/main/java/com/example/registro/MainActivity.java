@@ -3,63 +3,46 @@ package com.example.registro;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.registro.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+ private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initListeners();
     }
 
-
     private void initListeners(){
+        binding.btnSaveData.setOnClickListener(view -> {
+            if(binding.etvFirstName.getText().toString().isEmpty() ||
+               binding.etvLastName.getText().toString().isEmpty() ||
+               binding.etvEmail.getText().toString().isEmpty() ||
+               binding.etvPassword.getText().toString().isEmpty()){
 
-        EditText nombre = findViewById(R.id.etv_first_name);
-        EditText apellido = findViewById(R.id.etv_last_name);
-        EditText email = findViewById(R.id.etv_email);
-        EditText pass = findViewById(R.id.etv_password);
+                Toast.makeText(getBaseContext(), "Favor llenar todos los campos", Toast.LENGTH_SHORT).show();
 
-        Button guardar = findViewById(R.id.btn_save_data);
+            }else if(!binding.etvEmail.getText().toString().contains("@") ||!binding.etvEmail.getText().toString().contains(".")) {
+                Toast.makeText(getBaseContext(), "Ingrese Email válido", Toast.LENGTH_SHORT).show();
 
-        guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(nombre.getText().toString().isEmpty() ||
-                   apellido.getText().toString().isEmpty() ||
-                   email.getText().toString().isEmpty() ||
-                   pass.getText().toString().isEmpty()){
+            }else{
+                String mensaje = "Hi "+ binding.etvFirstName.getText().toString() + " " +binding.etvLastName.getText().toString()+
+                        ". Tu correo es "+ binding.etvEmail.getText().toString() +
+                        " y tu contraseña 'secreta' es "+binding.etvPassword.getText().toString();
 
-                    Toast.makeText(getBaseContext(), "Favor llenar todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), mensaje , Toast.LENGTH_SHORT).show();
 
-                }else if(!email.getText().toString().contains("@") ||!email.getText().toString().contains(".")) {
-
-                    Toast.makeText(getBaseContext(), "Ingrese Email válido", Toast.LENGTH_SHORT).show();
-
-                }else{
-
-                    String mensaje = "Hi "+ nombre.getText().toString() + " " +apellido.getText().toString()+
-                            ". Tu correo es "+ email.getText().toString() +
-                            " y tu contraseña 'secreta' es "+pass.getText().toString();
-
-                    Toast.makeText(getBaseContext(), mensaje , Toast.LENGTH_SHORT).show();
-
-                    nombre.setText("");
-                    apellido.setText("");
-                    email.setText("");
-                    pass.setText("");
-                }
+                binding.etvFirstName.setText("");
+                binding.etvLastName.setText("");
+                binding.etvEmail.setText("");
+                binding.etvPassword.setText("");
             }
         });
-
-
-
     }
-
 }
