@@ -3,7 +3,6 @@ package com.example.registro;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.registro.databinding.ActivityMainBinding;
